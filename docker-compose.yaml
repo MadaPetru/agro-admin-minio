@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  minio:
+    build: .
+    container_name: minio_server
+    ports:
+      - "8082:9000"
+      - "8083:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    command: ["server", "/data", "--console-address", ":9001"]
+
+volumes:
+  minio_data:
